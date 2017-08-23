@@ -1,4 +1,4 @@
-version 0.0.1
+version 0.0.2
 date 2017-08-22
 produced by: nomos
 
@@ -14,3 +14,8 @@ installation:
 start webserver:
 	- on terminal go to directory "script_call_x.x.x" and type "npm start"
 	
+bugs to solve:
+	- the url may not change after click on link
+
+Inspiration by IFTTT
+	https://maker.ifttt.com/use/dz0r7kghVg7cJrOc59Pi1c

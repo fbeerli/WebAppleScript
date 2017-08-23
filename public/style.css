@@ -1,4 +1,12 @@
 body{
+	font-family: -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", sans-serif;
+	font-size: 16px;
+	color: rgba(0, 0, 0, 0.8);
+
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	-moz-font-feature-settings: "liga" on;
 	background: #8899AA;
 }
 h1{
@@ -22,4 +30,10 @@ table td{
 }
 .cls_title img{
 	width: 3em;
+}
+
+#version{
+	color: #445566;
+	font-size: .8rem;
+	padding-left: 1rem
 }
