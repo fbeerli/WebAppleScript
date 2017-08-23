@@ -1,0 +1,16 @@
+version 0.0.1
+date 2017-08-22
+produced by: nomos
+
+
+description:
+	- webserver on localhost to call specified websites with AppleScript
+
+installation:
+	- install node
+	- install npm
+	- copy the folder "script_call_x.x.x" to any directory on your computer
+	
+start webserver:
+	- on terminal go to directory "script_call_x.x.x" and type "npm start"
+	
