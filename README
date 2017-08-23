@@ -1,10 +1,18 @@
-version 0.0.2
+version 0.0.3
 date 2017-08-22
 produced by: nomos
 
 
 description:
 	- webserver on localhost to call specified websites with AppleScript
+
+improved/revise:
+	- webserver can start any script from directory script without changing server.js
+	- every request is logged in the terminal reported with date and time
+	- change script name from xxx.app to xxx.scpt
+
+todo:
+	- list all files on Website from directory /script
 
 installation:
 	- install node
@@ -13,9 +21,7 @@ installation:
 	
 start webserver:
 	- on terminal go to directory "script_call_x.x.x" and type "npm start"
-	
-bugs to solve:
-	- the url may not change after click on link
 
-Inspiration by IFTTT
-	https://maker.ifttt.com/use/dz0r7kghVg7cJrOc59Pi1c
+PROBLEM:
+	- Safari calls every 2 Minutes the link(s) the user has once clicked
+	

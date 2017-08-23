@@ -1,7 +1,7 @@
 $('.js-xhr').on('click', function(e) {
-	//alert("class js-xhr click");
 	e.preventDefault();
 	var link = $(this).prop('href');
+	alert("class js-xhr click: " + link);
 	$.ajax({ type: 'GET', url: link,
 		success: function(resp) {
 			console.log(resp);
