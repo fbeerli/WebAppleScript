@@ -1,6 +1,6 @@
 {
   "name": "test",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "",
   "main": "server.js",
   "scripts": {
@@ -10,7 +10,9 @@
   "author": "Max Develop",
   "license": "ISC",
   "dependencies": {
+    "ejs": "^2.5.7",
     "express": "^4.15.4",
+    "fs": "0.0.1-security",
     "nodemon": "^1.11.0"
   }
 }
