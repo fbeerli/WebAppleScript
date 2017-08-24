@@ -1,11 +1,16 @@
 const express = require('express')
 const app = express()
 const exec = require('child_process').exec;
+const path = require('path');
+const fs = require('fs');
 
 app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
 
 app.use('/public', express.static('public'));
 app.use('/img', express.static('img'));
+
 
 // app.get('/', function (req, res) {
 // 	//createHtml();
@@ -14,7 +19,25 @@ app.use('/img', express.static('img'));
 // })
 app.get('/', function (req, res) {
     console.log( getDateTime() + " -> (GET) " + req.url );
-    res.render('index');
+    //var posts = createHtml();
+
+    let blogPosts = [
+        {
+            title: 'Perk is for real!',
+            body: '...',
+        },
+        {
+            title: 'Development continues...',
+            body: '...',
+        },
+        {
+            title: 'Welcome to Perk!',
+            body: '...',
+        }
+    ]
+
+
+    getFileList( res );
 })
 
 app.get('/:id', function(req, res) {
@@ -48,14 +71,21 @@ function getDateTime() {
     return year + "-" + month + "-" + day + "  " + hour + ":" + min + ":" + sec;
 }
 
-function createHtml(){
-    console.log("createHtml function");
-    const testFolder = './script/';
-    const fs = require('fs');
+function getFileList( res ){
+    console.log("getFileList() function");
+    const folder = './apple_script/';
 
-    fs.readdir(testFolder, (err, files) => {
-        files.forEach(file => {
-            console.log(file);
-        });
-    })
+    fs.readdir(folder, (err, files) => {
+        if( err ) { 
+            console.log( " - - > Error while reading directory: " + err );
+        }else if( files ){
+            // files.forEach(file => {
+            //     console.log( file );
+            // });
+            //console.log( "getFileList(): files.length: " + files.length );
+            res.render( 'index', { posts: files } );
+        }else{
+            console.log(" - - > getFileList, ELSE that never should happen");
+        }
+    });
 }

@@ -1,0 +1,45 @@
+<!-- views/index.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ./head %>
+</head>
+<body>
+    <header>
+        <% include ./header %>
+    </header>
+
+    <main>
+        <table>
+            <tr><th>Name</th><th>IP</th></tr>
+            <tr>
+                <td><a href="" data-path="camera.scpt" class="js-xhr">Camera</a></td>
+                <td>192.168.198.120</td>
+            </tr>
+            <tr>
+                <td><a href="" data-path="raspberry.scpt" class="js-xhr">Raspberry Pi</a></td>
+                <td>192.168.198.115</td>
+            </tr>
+            <tr>
+                <td><a href="" data-path="tja_20.scpt" class="js-xhr">TJA 665 Test Main</a></td>
+                <td>192.168.198.20</td>
+            </tr>
+        </table>
+        <h2>New dynamic version</h2>
+        <table>
+            <tr><th>My AppleScript</th></tr>
+
+            <% for(let i = 0; i < posts.length; i++) { %>
+                <tr><td><a href="" data-path="<%= posts[i] %>" class="js-xhr"><%= posts[i] %></a></td></tr>
+            <% } %>
+        </table>
+    </main>
+
+    <footer>
+        <% include ./footer %>
+    </footer>
+
+</body>
+    <script src="public/script.js"></script>
+</html>

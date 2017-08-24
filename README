@@ -1,4 +1,4 @@
-version 0.0.05
+version 0.0.06
 date 2017-08-22
 produced by: nomos
 
@@ -13,11 +13,14 @@ improved/revise:
 	- use "res.end()" in server.js for app.get()-function to stop Safari request all 2 Minutes
 	- npm install fs --save
 	- npm install ejs --save
+	- npm install path --save
+	- npm install jslint --save
+	- read directory ./apple_script dynamically and create a list of links for each scipt
 
 todo:	
     - create a dynamic index.html
 	- set "localhost" in links to server-ip-address dynamically 
-	- read directory ./script/ and list files as links in a html table to call AppleScript dynamically
+	- read directory ./apple_script/ and list files as links in a html table to call AppleScript dynamically
 
 installation:
 	- install node
@@ -25,6 +28,9 @@ installation:
 	- copy the folder "script_call_x.x.x" to any directory on your computer
 	
 start webserver:
-	- on terminal go to directory "script_call_x.x.x" and type "npm start"
+	- on terminal go to directory "apple_script" and type "npm start"
+
+test:
+	- sometimes for the first time Safari does not start when click on a link in the Website
 
 
