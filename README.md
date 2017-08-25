@@ -1,6 +1,6 @@
 ```
 Name     WebAppleScript
-Version  0.0.07
+Version  0.0.8
 Date     2017-08-25
 Producer Nomos
 ```
@@ -8,7 +8,7 @@ Producer Nomos
 # WebAppleScript
 
 ## Description:
-- Webserver on localhost to call and control specified application using AppleScript
+- Start and controll your application from a browser with AppleScript
 
 ## Prerequisite
 - Apple Macintosh
