@@ -52,18 +52,20 @@ function getDateTime() {
 }
 
 function getFileList( res ){
-    console.log("getFileList() function");
+    //console.log("getFileList() function");
     const folder = './apple_script/';
 
     fs.readdir(folder, (err, files) => {
+        let myList = [];
         if( err ) { 
             console.log( " - - > Error while reading directory: " + err );
         }else if( files ){
-            // files.forEach(file => {
-            //     console.log( file );
-            // });
+             files.forEach(file => {
+                let regex = /^[a-zA-Z0-9 _-]+\.(scpt|scptd|app|applescript)$/;
+                if( file.match( regex ) ) myList.push(file);
+             });
             //console.log( "getFileList(): files.length: " + files.length );
-            res.render( 'index', { posts: files } );
+            res.render( 'index', { posts: myList } );
         }else{
             console.log(" - - > getFileList, ELSE that never should happen");
         }
