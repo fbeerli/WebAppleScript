@@ -1,9 +1,3 @@
-```
-Name     WebAppleScript
-Version  0.0.8
-Date     2017-08-25
-Producer Nomos
-```
 
 # WebAppleScript
 
@@ -13,7 +7,7 @@ Producer Nomos
 ## Prerequisite
 - Apple Macintosh
 - AppleScript
-- Node and npm
+- [Node](https://nodejs.org)
 
 ## Installation
 - copy the whole folder "WebAppleScript" to any directory on your mac 

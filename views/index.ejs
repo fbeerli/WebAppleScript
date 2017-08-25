@@ -12,10 +12,14 @@
 
     <main>
         <table>
-            <tr><th>My AppleScript Listing</th></tr>
+            <tr><th>AppleScript</th><th>Link</th><th>Start</th></tr>
 
             <% for(let i = 0; i < posts.length; i++) { %>
-                <tr><td><a href="" data-path="<%= posts[i] %>" class="js-xhr"><%= posts[i] %></a></td></tr>
+                <tr>
+                    <td><a href="" data-path="<%= posts[i] %>" class="js-xhr"><%= posts[i] %></a></td>
+                    <td>http://<%= posts[i] %></td>
+                    <td><button type="button">Execute</button></td>
+                </tr>
             <% } %>
         </table>
     </main>

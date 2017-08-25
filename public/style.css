@@ -46,3 +46,10 @@ table td{
 main{
 	padding: 1rem;
 }
+button{
+	font-size: 1.1rem;
+	margin: .2rem;
+	padding: .1rem .4rem;
+	border-radius: .5rem;
+}
+

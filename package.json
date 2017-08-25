@@ -1,6 +1,6 @@
 {
   "name": "test",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "start an application on your mac from your browser",
   "main": "server.js",
   "scripts": {
