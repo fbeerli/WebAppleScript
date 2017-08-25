@@ -12,38 +12,18 @@ app.use('/public', express.static('public'));
 app.use('/img', express.static('img'));
 
 
-// app.get('/', function (req, res) {
-// 	//createHtml();
-// 	console.log( getDateTime() + " -> (GET) " + req.url );
-// 	res.sendFile(__dirname + '/public/index.html');
-// })
 app.get('/', function (req, res) {
     console.log( getDateTime() + " -> (GET) " + req.url );
-    //var posts = createHtml();
-
-    let blogPosts = [
-        {
-            title: 'Perk is for real!',
-            body: '...',
-        },
-        {
-            title: 'Development continues...',
-            body: '...',
-        },
-        {
-            title: 'Welcome to Perk!',
-            body: '...',
-        }
-    ]
-
-
     getFileList( res );
 })
 
 app.get('/:id', function(req, res) {
 	//console.log('User-Agent: ' + req.headers['user-agent']);
 	console.log( getDateTime() + " -> (GET) " + req.url );
-	exec( "osascript ./apple_script/" + req.params.id );
+    let as = req.params.id;
+    console.log(as);
+
+	exec( "osascript './apple_script/" + as + "'" );           // put the file name in simple quotation marks
     res.end();      // otherwise Safari makes request all 2 Minutes
 });
 
