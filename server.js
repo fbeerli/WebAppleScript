@@ -63,7 +63,10 @@ function getFileList( res ){
             console.log( " - - > Error while reading directory: " + err );
         }else if( files ){
          files.forEach(file => {
-            let regex = /^[a-zA-Z0-9 _-]+\.(scpt|scptd|app|applescript)$/;
+            //let regex = /^[a-zA-Z0-9 _äÄöÖüÜ-][a-zA-Z0-9 _äÄöÖüÜ-]+\.(scpt|scptd|app|applescript)$/;
+            //let regex = /^[.]+\.(scpt|scptd|app|applescript)$/;
+            //let regex = /^[a-zA-Z0-9 _\-\u00e4]+\.(scpt|scptd|app|applescript)$/;
+            let regex = /^[\w \-]+\.(scpt|scptd|app|applescript)$/;
             if( file.match( regex ) ) myList.push(file);
         });
             //console.log( "getFileList(): files.length: " + files.length );

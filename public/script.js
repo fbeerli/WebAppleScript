@@ -34,6 +34,23 @@ $('.btn_execute').on('click', function(e) {
 });
 
 
+$('.btn_copy').on('click', function(e) {
+	e.preventDefault();
+	var link = $(this).data('path');
+	var link = encodeURI(link); 
+	// var link = link.replace(/ /g, "%20");
+	alert("class btn_click click: " + link);
+	link.toString();
+  	var vInput = document.createElement("input");
+  	document.body.appendChild( vInput );
+  	vInput.setAttribute("id", "ipt_url");
+  	document.getElementById("ipt_url").value=link;  
+  	ipt_url.select();
+  	document.execCommand("copy");
+  	document.body.removeChild(ipt_url);
+});
+
+
 $('.td_url').on('click', function(e) {
 	e.preventDefault();
 	//$(this).select();

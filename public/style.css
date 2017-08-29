@@ -9,6 +9,14 @@ body{
 	-moz-font-feature-settings: "liga" on;
 	background: #778899;
 }
+#div_main{
+	margin: 1rem 0;
+	width: 860px;
+	background: #8899AA;
+	border-radius: .4rem;
+	margin-left: auto;
+	margin-right: auto;
+}
 h1{
 	color: #334455;
 	padding:0;
@@ -21,19 +29,29 @@ li{
 	color: #445566;
 }
 a{
-	color:#BBCCDD;
+	color:#DDEEFF;
+}
+a:hover{
+	color:#DDEEFF;
 }
 table th{
 	color: #445566;
 	text-align: left;
 	padding: 0 0 0 1rem;
+	font-size: 1.4rem;
 }
 table td{
-	padding: 0 0 0 1rem;
+	padding: 0 1rem 0 1rem;
 	valign:bottom;
 	border: 1px #99AABB solid;
 	border: none;
-	color: #BBCCDD;
+	color: #DDEEFF;
+}
+table.tbl_list tr:nth-child(2n+2){
+	background: #778899;
+}
+table.tbl_list tr:nth-child(2n+3){
+	background: #667788;
 }
 .cls_title img{
 	width: 3em;
@@ -49,10 +67,22 @@ main{
 }
 button{
 	font-size: 1.1rem;
-	margin: .2rem;
-	padding: .1rem .4rem;
+	margin: .1rem;
+	padding: 0 .4rem;
 	border-radius: .5rem;
 	color: #445566;
+}
+
+
+
+@media screen and (max-width:860px) {
+  /* CSS for screens that are 560 pixels or less will be put in this section */
+	body{
+		background: #8899AA;
+	}
+	table.tbl_list th:nth-child(2), table.tbl_list td:nth-child(2){
+		display: none;
+	}
 }
 
 @media screen and (max-width:560px) {
