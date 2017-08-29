@@ -24,7 +24,7 @@ a{
 	color:#BBCCDD;
 }
 table th{
-	color: #CCDDEE;
+	color: #445566;
 	text-align: left;
 	padding: 0 0 0 1rem;
 }
@@ -33,15 +33,16 @@ table td{
 	valign:bottom;
 	border: 1px #99AABB solid;
 	border: none;
+	color: #BBCCDD;
 }
 .cls_title img{
 	width: 3em;
 }
 
-#version{
+.decent{
 	color: #445566;
-	font-size: 1rem;
-	padding-left: 1rem
+	font-size: 1.3rem;
+	padding-left: 1rem;
 }
 main{
 	padding: 1rem;
@@ -51,5 +52,25 @@ button{
 	margin: .2rem;
 	padding: .1rem .4rem;
 	border-radius: .5rem;
+	color: #445566;
 }
+
+@media screen and (max-width:560px) {
+  /* CSS for screens that are 560 pixels or less will be put in this section */
+ 	table.tbl_list th:nth-child(1n+2){
+ 		display: none;
+ 	}
+ 	table.tbl_list td:nth-child(1n+2){
+ 		display: none;
+ 	}
+ 	table.tbl_list td:nth-child(1){
+ 		font-size: 2rem;
+ 	}
+ 	.decent{
+ 		display:none;
+ 	}
+} 
+
+
+
 

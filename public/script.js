@@ -18,3 +18,23 @@ $('.js-xhr').on('click', function(e) {
 		}
 	});
 });
+
+$('.btn_execute').on('click', function(e) {
+	e.preventDefault();
+	var link = $(this).data('path');
+	//alert("class btn_execute click: " + link);
+	$.ajax({ type: 'GET', url: link,
+		success: function(resp) {
+			console.log(resp);
+		},
+		error: function(err) {
+			console.log(err);
+		}
+	});
+});
+
+
+$('.td_url').on('click', function(e) {
+	e.preventDefault();
+	//$(this).select();
+});

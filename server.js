@@ -1,8 +1,9 @@
-const express = require('express')
-const app = express()
-const exec = require('child_process').exec;
-const path = require('path');
-const fs = require('fs');
+const express   = require('express')
+const app       = express()
+const exec      = require('child_process').exec;
+const path      = require('path');
+const fs        = require('fs');
+const os        = require( 'os');
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -54,20 +55,54 @@ function getDateTime() {
 function getFileList( res ){
     //console.log("getFileList() function");
     const folder = './apple_script/';
+    var vIp = getServerIpAddress();
 
     fs.readdir(folder, (err, files) => {
         let myList = [];
         if( err ) { 
             console.log( " - - > Error while reading directory: " + err );
         }else if( files ){
-             files.forEach(file => {
-                let regex = /^[a-zA-Z0-9 _-]+\.(scpt|scptd|app|applescript)$/;
-                if( file.match( regex ) ) myList.push(file);
-             });
+         files.forEach(file => {
+            let regex = /^[a-zA-Z0-9 _-]+\.(scpt|scptd|app|applescript)$/;
+            if( file.match( regex ) ) myList.push(file);
+        });
             //console.log( "getFileList(): files.length: " + files.length );
-            res.render( 'index', { posts: myList } );
+            //console.log( vIp );
+            res.render( 'index', { posts: myList, ip: vIp } );
         }else{
             console.log(" - - > getFileList, ELSE that never should happen");
         }
     });
 }
+
+function getServerIpAddress(){
+    var vIp = 0;
+    var ifaces = os.networkInterfaces();
+
+    Object.keys(ifaces).forEach(function (ifname) {
+        var alias = 0;
+
+        ifaces[ifname].forEach(function (iface) {
+            if ('IPv4' !== iface.family || iface.internal !== false) {
+                // skip over internal (i.e. 127.0.0.1) and non-ipv4 addresses
+                return;
+            }
+
+            if (alias >= 1) {
+                // this single interface has multiple ipv4 addresses
+                // console.log(ifname + ':' + alias, iface.address);
+                //return iface.address;
+            } else {
+                // this interface has only one ipv4 adress
+                // console.log("AAAA: ", iface.address);
+                vIp = iface.address;
+                // console.log("IP: ", vIp);
+            }
+            ++alias;
+        });
+    });
+    return vIp;
+}
+
+
+

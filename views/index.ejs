@@ -11,14 +11,18 @@
     </header>
 
     <main>
-        <table>
+        <table class="tbl_list">
             <tr><th>AppleScript</th><th>Link</th><th>Start</th></tr>
 
             <% for(let i = 0; i < posts.length; i++) { %>
                 <tr>
                     <td><a href="" data-path="<%= posts[i] %>" class="js-xhr"><%= posts[i] %></a></td>
-                    <td>http://<%= posts[i] %></td>
-                    <td><button type="button">Execute</button></td>
+                    <td class="td_url">http://<%= ip %>:3000/<%= posts[i] %></td>
+                    <td>
+                        <button type="button" class="btn_execute" data-path="<%= posts[i] %>">
+                            Execute
+                        </button>
+                    </td>
                 </tr>
             <% } %>
         </table>
