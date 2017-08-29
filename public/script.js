@@ -39,7 +39,7 @@ $('.btn_copy').on('click', function(e) {
 	var link = $(this).data('path');
 	var link = encodeURI(link); 
 	// var link = link.replace(/ /g, "%20");
-	alert("class btn_click click: " + link);
+	//alert("class btn_click click: " + link);
 	link.toString();
   	var vInput = document.createElement("input");
   	document.body.appendChild( vInput );
