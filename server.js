@@ -20,9 +20,9 @@ app.get('/', function (req, res) {
 
 app.get('/:id', function(req, res) {
 	//console.log('User-Agent: ' + req.headers['user-agent']);
-	console.log( getDateTime() + " -> (GET) " + req.url );
     let as = req.params.id;
-    console.log(as);
+	console.log( getDateTime() + " -> (GET:Execute) " + as );
+    //console.log(as);
 
 	exec( "osascript './apple_script/" + as + "'" );           // put the file name in simple quotation marks
     res.end();      // otherwise Safari makes request all 2 Minutes

@@ -18,3 +18,6 @@
 - create an AppleScript and save it in "WebAppleScript/apple_script/"
 - in your Browser goto http://localhost:3000
 
+## just for test
+This is just for my self to test and work with git and its commands
+
