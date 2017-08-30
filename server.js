@@ -30,7 +30,7 @@ app.get('/:id', function(req, res) {
 
 
 app.listen(3000, function () {
-	console.log('Example app listening on port 3000!')
+	console.log('Listening on http://localhost:3000')
 })
 
 
@@ -59,7 +59,7 @@ function getFileList( res ){
 
     fs.readdir(folder, (err, files) => {
         let myList = [];
-        if( err ) { 
+        if( err ) {
             console.log( " - - > Error while reading directory: " + err );
         }else if( files ){
          files.forEach(file => {
