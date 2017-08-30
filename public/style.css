@@ -12,7 +12,8 @@ body{
 #div_main{
 	margin: 1rem 0;
 	width: 860px;
-	background: #8899AA;
+	background: #AABBCC;
+	border: 1px solid grey;
 	border-radius: .4rem;
 	margin-left: auto;
 	margin-right: auto;
@@ -27,6 +28,14 @@ ul{
 }
 li{
 	color: #445566;
+}
+.cls_title img{
+	width: 3em;
+}
+.decent{
+	color: #445566;
+	font-size: 1.3rem;
+	padding-left: 1rem;
 }
 a{
 	color:#DDEEFF;
@@ -55,6 +64,9 @@ table td{
 	border-radius: .4rem;
 	display: inline-flex;
 }
+table.tbl_list .td_as:hover{
+	cursor: pointer;
+}
 table.tbl_list{
 	display: inline-flex;
 }
@@ -67,14 +79,30 @@ table.tbl_list tr:nth-child(2n+3){
 table.tbl_list td:nth-child(1n+3){
 	vertical-align: middle;
 }
-.cls_title img{
-	width: 3em;
+table.tbl_list tr:nth-child(1n+2):hover{
+	background: #556677;
 }
-.decent{
-	color: #445566;
-	font-size: 1.3rem;
-	padding-left: 1rem;
+#div_reload{
+	display: inline-block;
+	cursor: pointer;
+	padding: 0 .7rem;
+	margin: 0 0 .5rem 1rem;
+	background: #99AABB;
+	border: solid 1px #99AABB;
+	border-radius: .4rem;
+	box-shadow: 0px 0px 10px #99AABB;
 }
+#div_reload:hover{
+	margin: 0 0 .5rem 1rem;
+	background: #BBBBBB;
+	border: solid 1px #99AABB;
+	border-radius: .4rem;
+	box-shadow: 0px 0px 10px #EEEEEE;
+}
+#div_reload img{
+	width: 1.8rem;
+}
+
 main{
 	padding: 1rem;
 }
@@ -94,10 +122,9 @@ button{
 		background: #8899AA;
 	}
 	#div_main{
+		background: #8899AA;
 		width: 100%;
-	}
-	table.tbl_list th:nth-child(2), table.tbl_list td:nth-child(2){
-		display: none;
+		border: none;
 	}
 }
 

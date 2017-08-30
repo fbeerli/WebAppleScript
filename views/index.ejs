@@ -14,19 +14,22 @@
     <main>
         <div class="div_list">
         <table class="tbl_list">
-            <tr><th>AppleScript</th><th>Link</th><th>Copy Link</th><th>Start</th></tr>
+            <tr><th>AppleScript<div id="div_reload" title="Reload Directory"><img src="/img/reload.png"></div></th>
+                <th>Copy Link</th><th>Start</th>
+            </tr>
 
             <% for(let i = 0; i < posts.length; i++) { %>
                 <tr>
-                    <td><a href="" data-path="<%= posts[i] %>" class="js-xhr"><%= posts[i] %></a></td>
-                    <td class="td_url">http://<%= ip %>:3000/<%= posts[i] %></td>
+                    <td class="js-xhr td_as" data-path="<%= posts[i] %>">
+                        <a href="" data-path="<%= posts[i] %>" class="js-xhr"><%= posts[i] %></a>
+                    </td>
                     <td>
                         <button type="button" class="btn_copy" data-path="http://<%= ip %>:3000/<%= posts[i] %>">
-                            Copy Link
+                            Copy URL
                         </button>
                     </td>
                     <td>
-                        <button type="button" class="btn_execute" data-path="<%= posts[i] %>">
+                        <button type="button" class="js-xhr" data-path="<%= posts[i] %>">
                             Execute
                         </button>
                     </td>
