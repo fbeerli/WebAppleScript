@@ -1,0 +1,82 @@
+#
+# Language file ENglish for template_01
+#
+#   EOKV = "End of Key Value"
+#
+
+title                     			Template 01 #<-EOKV->#
+
+save                      			Save #<-EOKV->#
+detail                       		Detail about a Birthday #<-EOKV->#
+detail.nofile         				No Files available #<-EOKV->#
+
+#   MENU
+menu.info                    		Information #<-EOKV->#
+start                   			Startsite #<-EOKV->#
+menu.home                    		Homepage #<-EOKV->#
+menu.edit.on                 		Edit-Mode On #<-EOKV->#
+menu.edit.off                		Edit-Mode Off #<-EOKV->#
+menu.root.enable             		Root enable #<-EOKV->#
+menu.root.disable            		Root disable #<-EOKV->#
+menu.test                    		Test #<-EOKV->#
+
+#   MESSAGE
+message.delete.birthday      		Do you really want to delete the birthday with primary key $1 and all of it subdata? #<-EOKV->#
+message.date.format          		Wrong date format<br>Please use "day.month.year" in numbers. #<-EOKV->#
+message.time.format          		Wrong time format<br>Please use "hour:minute:second" in numbers. #<-EOKV->#
+message.permission.delete.file     	<h5>No rights to delete</h5>Sorry - Your account "$1" has no rights to delete birthdays. #<-EOKV->#
+permission.add.birthday    			<h5>No rights to edit</h5>Sorry - Your account "$1" has no rights to add birthdays. #<-EOKV->#
+
+#   INFO
+info.information             		Information #<-EOKV->#
+info.general                 		General #<-EOKV->#
+info.general.text     				<h4>Birthday</h4>
+									<p>Is the application to save the birthday of your friends and colleagues and you will be remebered by eMail or message.
+									<p>Press "<b>a</b>" to enable/disable Admin/Edit-Mode. #<-EOKV->#
+info.shortcut                		Shorotcut #<-EOKV->#
+info.shortcut.text     <tr>
+	<td>ESC</td>
+	<td>
+		<ul>
+			<li>a View back</li>
+			<li>cancel without save</li>
+		</ul>
+	</td>
+</tr><tr>
+	<td>→</td>
+	<td>next record</td>
+</tr><tr>
+	<td>←</td>
+	<td>record before</td>
+</tr><tr>
+	<td>a</td>
+	<td><b>A</b>dmin Mode on/off</td>
+</tr><tr>
+	<td>h</td>
+	<td><b>H</b>elp, Information</td>
+</tr><tr>
+	<td>i</td>
+	<td><b>I</b>nformation</td>
+</tr><tr>
+	<td>m</td>
+	<td><b>m</b>enu</td>
+</tr><tr>
+	<td>n</td>
+	<td><b>n</b>ew record</td>
+</tr><tr>
+	<td>r</td>
+	<td><b>R</b>oot mode on/off</td>
+</tr><tr>
+	<td>Enter</td>
+	<td>save and exit edit mode<br>(only in one-line input text field)</td>
+</tr><tr>
+	<td>Ctrl + s</td>
+	<td><b>s</b>ave and close edit mode</td>
+</tr> #<-EOKV->#
+info.language                Language #<-EOKV->#
+info.lang.english            English #<-EOKV->#
+info.lang.german             German #<-EOKV->#
+info.version                 Applicationreport #<-EOKV->#
+
+
+
