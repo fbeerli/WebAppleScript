@@ -6,9 +6,11 @@ const fs            = require('fs');
 const os            = require('os');
 const bodyParser    = require('body-parser');
 const util          = require('util');
+const vServerPort   = 3000;
+const vServerIp     = getServerIpAddress();
 
 
-const folder = './apple_script/';
+const vScriptFolder = './apple_script/';
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -22,13 +24,20 @@ app.use( bodyParser.urlencoded({ extended: true }));     // to support URL-encod
 
 
 app.get('/', function (req, res) {
-    console.log( getDateTime() + " -> (GET) " + req.url );
-    renderFileListForIndex( res );
+    console.log( getDateTime() + " -> GET:" + req.url );
+    //res.sendFile( __dirname + '/public/index.html');
+    //renderFileListForIndex( res );
+    console.log( vServerIp );
+    res.render( 'index', { vIp: vServerIp, vServerPort: vServerPort } );
 })
 
 app.get('/:id', function(req, res) {
+    // id is the script name sent from the client to the server
 	//console.log('User-Agent: ' + req.headers['user-agent']);
-    executeScript( req, res );
+    console.log( getDateTime() + " -> GET: execute AppleScript) \"" + req.params.id + "\"");
+    //res.sendStatus(200);
+    //exec( "osascript './apple_script/" + req.params.id + "'");
+    verifyScript( req, res );
 });
 
 app.post('/', function(req, res){
@@ -40,7 +49,10 @@ app.post('/', function(req, res){
 });
 
 app.listen(3000, function () {
-	console.log('Listening on http://localhost:3000')
+    console.log('Listening on http://localhost:3000' );
+})
+app.listen(vServerPort, vServerIp, function () {
+    console.log('Listening on http://' + vServerIp + ':' + vServerPort );
 })
 
 
@@ -66,13 +78,13 @@ function renderFileListForIndex( res ){
     //console.log("renderFileListForIndex() function");
     var vIp = getServerIpAddress();
 
-    fs.readdir(folder, (err, files) => {
+    fs.readdir(vScriptFolder, (err, files) => {
         let myList = [];
         if( err ) {
             console.log( " - - > Error while reading directory: " + err );
         }else if( files ){
          files.forEach(file => {
-            if( file.match(  getFileRegex()  ) ) myList.push(file);
+            if( file.match(  getFileRegex( "file" )  ) ) myList.push(file);
         });
             //console.log( "renderFileListForIndex(): files.length: " + files.length );
             //console.log( vIp );
@@ -85,13 +97,13 @@ function renderFileListForIndex( res ){
 
 function createFileListAndSendToClient( res ){
     var vIp = getServerIpAddress();
-    fs.readdir(folder, (err, files) => {
+    fs.readdir(vScriptFolder, (err, files) => {
         let myList = [];
         if( err ) {
             console.log( " - - > Error while reading directory: " + err );
         }else if( files ){
             files.forEach(file => {
-            if( file.match(  getFileRegex()  ) ) myList.push(file);
+            if( file.match(  getFileRegex( "file" )  ) ) myList.push(file);
         });
             //console.log( "renderFileListForIndex(): files.length: " + files.length );
             //console.log( vIp );
@@ -128,49 +140,48 @@ function getServerIpAddress(){
     return vIp;
 }
 
-function executeScript( req, res ){
+function verifyScript( req, res ){
     let vScript = req.params.id;
-    if( vScript.match(  getFileAppleScriptRegex()  ) && fs.existsSync( folder + vScript ) ){
-        console.log( getDateTime() + " -> (GET:Execute AppleScript) \"" + vScript + "\"");
-        exec( "osascript './apple_script/" + vScript + "'", function(error, stdout, stderr) {
-            res.send( "State OK:\n + Script \"" + vScript + "\" has been execueted\n" );
-            res.send( "stderr: " + stderr );
-            res.end( stdout );
-        });
-    }else if( vScript.match(  getFileBashRegex()  ) && fs.existsSync( folder + vScript ) ){
-        console.log( getDateTime() + " -> (GET:Execute bash script) \"" + vScript + "\"");
-        //var vBashResult = exec( "bash './apple_script/" + vScript + "'" ); 
-        
-        exec( "bash './apple_script/" + vScript + "'", function(error, stdout, stderr){ 
-            res.send( "stderr:\n" + stderr );
-            res.end( stdout );
-            // res.end() - otherwise Safari makes request all 2 Minutes
-        });
-
-    }else if( vScript.match( getFileRegex() ) && !fs.existsSync( folder + vScript ) ){
-        console.log( getDateTime() + " -> (GET:Execute) \"" + vScript + "\" file not available" );
-        res.send( "State Error:\n - Script \"" + vScript + "\" not available\n" );
-        res.end();      // otherwise Safari makes request all 2 Minutes
+    if(! vScript.match( getFileRegex( "file" ) ) ){
+        res.end( " - Error:\n    Not allowed character in filename \"" + vScript + "\"" );
+        return;
+    }
+    if(! fs.existsSync( vScriptFolder + vScript ) ){
+        res.end( " - Error:\n    File not found \"" + vScript + "\"" );
+        return;
+    }
+    if( vScript.match( getFileRegex( "osascript" ))){
+        executeScript( "osascript", vScript, null );
+        res.send( "osascript" );
+        res.end();
+    }else if( vScript.match( getFileRegex( "shell" ))){
+        executeScript( "bash", vScript, res );
     }else{
-        console.log( getDateTime() + " -> (GET:Execute) \"" + vScript + "\" " );
-        res.send( "State Error:\n - Script \"" + vScript + "\" invalid character in filename\n" );
-        res.end();      // otherwise Safari makes request all 2 Minutes
+        res.end("this file extension is not supported \n" + vScript);
     }
 }
 
-function getFileRegex(){
-    // defines the carachters allowed in files to list and execute it
-    return /^[\w \-]+\.(scpt|scptd|app|applescript|bs)$/;
+function executeScript( vExe, vScript, res ){
+    exec( "" + vExe + " './" + vScriptFolder + "/" + vScript + "'", function(error, stdout, stderr) {
+        if( res && error ){
+            res.end( error + "\n" + stderr );
+        }else if( res && stdout ){
+            res.end( stdout );
+        }else if( res && stderr ){
+            res.end( stderr );
+        }
+    });
 }
 
-function getFileAppleScriptRegex(){
+function getFileRegex( vType ){
     // defines the carachters allowed in files to list and execute it
-    return /^[\w \-]+\.(scpt|scptd|app|applescript)$/;
-}
-
-function getFileBashRegex(){
-    // defines the carachters allowed in files to list and execute it
-    return /^[\w \-]+\.(bash|bs)$/;
+    if( vType == "file" ){
+        return /^[\w \.\-]+\.(scpt|scptd|app|applescript|sh|bs|bash)$/i;
+    }else if( vType == "osascript" ){
+        return /^[\w \.\-]+\.(scpt|scptd|app|applescript)$/i;
+    }else if( vType == "shell" ){
+        return /^[\w \.\-]+\.(sh|bs|bash)$/i;
+    }
 }
 
 
