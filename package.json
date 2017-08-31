@@ -1,6 +1,6 @@
 {
   "name": "WebAppleScript",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "start an application on your mac with your browser",
   "main": "server.js",
   "scripts": {
