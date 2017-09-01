@@ -54,7 +54,8 @@ function createNewFileList( vFileList, ip ){
     for( var i = 0; i < vFileList.length; i++ ){
     	vContent += 
     		'<tr>' +
-    			'<td class="js-xhr td_as" data-path="http://' + vServerIp + ':' + vServerPort + '/' + vFileList[i] + '">' +
+    			//'<td class="js-xhr td_as" data-path="http://' + vServerIp + ':' + vServerPort + '/' + vFileList[i] + '">' +
+    			'<td class="js-xhr td_as" data-path="' + vFileList[i] + '">' +
                     '<a href="" data-path="' + vFileList[i] + '" class="js-xhr">' + vFileList[i] + '</a>' +
                 '</td>' +
                 '<td>' +
@@ -103,9 +104,10 @@ function createReloadButton(){
 function enableEventListener(){
 	$('.js-xhr').unbind();
 	$('.js-xhr').on('click', function(e) {
+		var link = $(this).data('path');
+		//alert( "click js-xhr: " + link );
 		e.preventDefault();
 		e.stopPropagation();
-		var link = $(this).data('path');
 		//alert("Function \"" + enableEventListener.name + "()\" " + link);
 		$.ajax({ type: 'GET', url: link,
 			success: function(resp) {
