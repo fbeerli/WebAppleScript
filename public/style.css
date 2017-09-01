@@ -151,6 +151,9 @@ button{
 
 @media screen and (max-width:560px) {
 	/* CSS for screens that are 560 pixels or less will be put in this section */
+	#div_main{
+		margin:0;
+	}
  	table.tbl_list th:nth-child(1n+2){
  		display: none;
  	}
@@ -160,6 +163,10 @@ button{
  	table.tbl_list td:nth-child(1){
  		font-size: 2rem;
  	}
+ 	table.tbl_list td:nth-child(1n+3){
+ 		padding: 0 0 0 .5rem;
+ 		margin: 0;
+ 	}
  	.decent{
  		display:none;
  	}
@@ -167,10 +174,11 @@ button{
  		display:none;
  	}
   	div.div_list{
-  		/* width: 100%;  */
+  		width: 100%; 
   	}
-  	table.tbl_list, table.tbl_list tr{
+  	table.tbl_list{
   		width: 100%;
+		display: inline-table;
   	}
 } 
 
