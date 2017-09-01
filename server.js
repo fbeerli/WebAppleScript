@@ -73,23 +73,28 @@ function validateAjaxAction( req, res ){
 }
 
 function deleteFile( req, res ){
-    if( fs.lstatSync( vScriptFolder + req.body.filename ).isFile() ){
-        fs.unlink( vScriptFolder + req.body.filename, function( err ){
-            if( err ){
-                console.log( getDateTime() + ' -> ERROR while try to delete file: "' + vScriptFolder + req.body.filename + '"' );
-            }else{
-                console.log( getDateTime() + ' -> DELETE file: "' + vScriptFolder + req.body.filename + '"' );
-            }
+    const vPath = vScriptFolder + req.body.filename;
+    if ( fs.existsSync( vPath ) ){                      // file exists
+        if( fs.lstatSync( vPath ).isFile() ){           // is file (not folder)
+            fs.unlink( vPath, function( err ){
+                if( err ){
+                    console.log( getDateTime() + ' -> ERROR while try to delete file: "' + vPath + '"' );
+                }else{
+                    console.log( getDateTime() + ' -> DELETE file: "' + vPath + '"' );
+                }
+                createFileListAndSendToClient( res );
+            })
+        }else if( fs.lstatSync( vPath ).isDirectory() ){    // is folder
+            console.log( getDateTime() + ' -> DELETE folder: "' + vPath + '"' );
+            rmdir( vScriptFolder + req.body.filename );
             createFileListAndSendToClient( res );
-        })
-    }else if( fs.lstatSync( vScriptFolder + req.body.filename ).isDirectory() ){
-        //console.log( getDateTime() + ' -> is a folder - NOT deleted: "' + vScriptFolder + req.body.filename + '"' );
-        console.log( getDateTime() + ' -> DELETE folder: "' + vScriptFolder + req.body.filename + '"' );
-        rmdir( vScriptFolder + req.body.filename );
+        }else{
+            console.log( getDateTime() + ' -> NO file nor folder (NO action): "' + vPath + '"' );
+            createFileListAndSendToClient( res );
+        }
+    }else{          // file not available
+        console.log( getDateTime() + ' -> file not available: "' + vPath + '"' );
         createFileListAndSendToClient( res );
-    }else{
-        console.log( getDateTime() + ' -> NO file nor folder (NO action): "' + vScriptFolder + req.body.filename + '"' );
-        res.end();
     }
 }
 
