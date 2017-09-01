@@ -150,7 +150,7 @@ button{
 }
 
 @media screen and (max-width:560px) {
-  /* CSS for screens that are 560 pixels or less will be put in this section */
+	/* CSS for screens that are 560 pixels or less will be put in this section */
  	table.tbl_list th:nth-child(1n+2){
  		display: none;
  	}
@@ -166,6 +166,12 @@ button{
  	ul{
  		display:none;
  	}
+  	div.div_list{
+  		/* width: 100%;  */
+  	}
+  	table.tbl_list, table.tbl_list tr{
+  		width: 100%;
+  	}
 } 
 
 
