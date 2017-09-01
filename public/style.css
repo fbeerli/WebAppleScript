@@ -64,6 +64,11 @@ table td{
 	border-radius: .4rem;
 	display: inline-flex;
 }
+#add_file{
+	width: 1.4rem;
+	cursor: pointer;
+	margin-left: 1rem;
+}
 table.tbl_list .td_as:hover{
 	cursor: pointer;
 }
@@ -81,6 +86,13 @@ table.tbl_list td:nth-child(1n+3){
 }
 table.tbl_list tr:nth-child(1n+2):hover{
 	background: #556677;
+}
+table.tbl_list td:nth-child(1n+4){
+	background: #99AABB;
+}
+table.tbl_list td:nth-child(1n+4) img{
+	width: 1.5rem;
+	cursor: pointer;
 }
 #div_reload{
 	display: inline-block;
@@ -114,7 +126,9 @@ button{
 	color: #445566;
 	white-space: nowrap;
 }
-
+.cls_admin{					/* do not show components for EDIT-MODE per default */ 
+	display:none;
+}
 
 
 @media screen and (max-width:860px) {

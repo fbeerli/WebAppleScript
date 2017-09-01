@@ -4,6 +4,9 @@
 	regexp: true, sloppy: true, vars: false,
 	white: true
 */
+
+
+var vAdminMode = false;
 var vServerIP;
 var vServerPort;
 
@@ -22,13 +25,30 @@ $( document ).ready( function (){
 		}
 	});
 	enableEventListener();
+	keyboardEventHandler();
 });
+
+function keyboardEventHandler(){
+    $(document).unbind().keydown();
+    $(document).unbind().keyup();
+   	$(document).keyup(function(event) {
+        event = event || window.event;
+        event.stopPropagation();
+        if( event.keyCode == 27 ) switchAdminMode( false );                                 // 27 == ESC
+        if( event.keyCode == 69 ) switchAdminMode(); 										// 69 == e == edit == admin mode
+        if( event.keyCode == 82 ) $('#div_reload').click();									// 82 == r == reload
+    });
+}
 
 function createNewFileList( vFileList, ip ){
 	$('.div_list').empty().hide();
 	var vContent = '' + 
 		'<table class="tbl_list">' +
-            '<tr id="tr_header"><th>AppleScript<div id="div_reload" title="Reload Directory"><img src="/img/reload.png"></div></th>' +
+            '<tr id="tr_header">' +
+	            '<th>AppleScript' +
+	            	'<div id="div_reload" title="Reload Directory"><img src="/img/reload.png"></div>' +
+	            	'<img id="add_file" class="cls_admin" src="/img/add.png">' +
+	            '</th>' +
                 '<th>Copy Link</th><th>Start</th>' +
             '</tr>';
     for( var i = 0; i < vFileList.length; i++ ){
@@ -47,6 +67,12 @@ function createNewFileList( vFileList, ip ){
                         'Execute' +
                     '</button>' +
                 '</td>' +
+                '<td class="cls_admin cls_edit">' +
+                    '<img data-path="'+ vFileList[i] + '" src="/img/edit.png">' +
+                '</td>' +
+                '<td class="cls_admin cls_delete">' +
+                    '<img class="" data-path="'+ vFileList[i] + '" src="/img/delete.png">' +
+                '</td>' +
            	'</tr>';
     }
     vContent += '</table>'; 
@@ -54,6 +80,7 @@ function createNewFileList( vFileList, ip ){
 	enableEventListener();
 };
 function createReloadFinished(){
+	// change the relaod button so the user knows that something is going on
 	var vContent = '' + 
         '<th>AppleScript<div id="div_reload" style="color:green;">OK</div></th>' +
         '<th>Copy Link</th><th>Start</th>';
@@ -61,9 +88,16 @@ function createReloadFinished(){
 }
 function createReloadButton(){
 	var vContent = '' + 
-        '<th>AppleScript<div id="div_reload" title="Reload Directory"><img src="/img/reload.png"></div></th>' +
+        '<th>AppleScript' +
+        	'<div id="div_reload" title="Reload Directory"><img src="/img/reload.png"></div>' +
+        	'<img id="add_file" class="cls_admin" src="/img/add.png">' +
+        '</th>' +
         '<th>Copy Link</th><th>Start</th>';
 	$('#tr_header').empty().append( vContent ).show();
+	if(vAdminMode){
+		vAdminMode = false;
+		switchAdminMode();
+	}
 }
 
 function enableEventListener(){
@@ -117,6 +151,34 @@ function enableEventListener(){
 				}
 		});
 	});
+	$('#add_file').unbind();
+	$('#add_file').on('click', function(e){
+		alert( "Add new File to list - is not yet implemented") ;
+	});
+	$('.cls_edit').unbind();
+	$('.cls_edit').on('click', function(e){
+		alert( "Edit File is not yet implemented") ;
+	});
+	$('.cls_delete').unbind();
+	$('.cls_delete').on('click', function(e){
+		var link = $(this).children().data('path');
+		if( confirm( 'Delete file: "' + link + '" on WEB-SERVER?') ){
+			$.ajax({ 
+				type: 'POST', 
+				data: { action: 'deleteFile', filename: link },
+				success: function(resp) {
+					console.log(resp);
+					createNewFileList( resp.fileList, resp.ip );
+					createReloadFinished();
+					setTimeout(function(){ createReloadButton(), enableEventListener() }, 1000);
+				},
+				error: function (jqXHR, exception) {
+					errorHandlingAjax( jqXHR, exception );
+					console.log(jqXHR);
+					}
+			});
+		}
+	});
 }
 
 function errorHandlingAjax( jqXHR, exeption ){
@@ -140,3 +202,18 @@ function errorHandlingAjax( jqXHR, exeption ){
 	console.log(jqXHR);
 }
 
+function switchAdminMode( newAdminMode ){                 // ADMIN MODE is to switch website in an EDIT MODE
+    //  switch edit mode on/off
+    if( newAdminMode === false ){
+    	vAdminMode = true;
+    }else if( newAdminMode === true ){
+    	vAdminMode = false;
+    }
+    if( vAdminMode ){ 
+        vAdminMode = false;
+        $('.cls_admin').hide();
+    }else{ 
+        vAdminMode = true;
+        $('.cls_admin').show(); 
+    };
+}
